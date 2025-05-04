@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Active Tornado Warnings</title>
+  <style>
+    /* Simple style to resemble your screenshot */
+    #activeWarnings {
+      font-weight: bold;        /* Bold text */
+      padding: 5px 10px;        /* Some padding */
+      border-radius: 4px;       /* Rounded corners */
+      font-family: Arial, sans-serif; /* Optional: set a clean font */
+	  font-size: 40px;
+      color:white;
+    }
+  </style>
+</head>
+<body>
+  <!-- This is where we'll show "Active Warnings: #" -->
+  <span id="activeWarnings">Active Warnings: 0</span>
+
+  <script>
+    async function fetchTornadoWarnings() {
+      try {
+        const response = await fetch('https://api.weather.gov/alerts/active');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+
+        // Filter for alerts where the event is "Tornado Warning"
+        const tornadoWarnings = data.features.filter(feature => 
+          feature.properties.event === "Tornado Warning"
+        );
+
+        // Update the badge text
+        const count = tornadoWarnings.length;
+        document.getElementById('activeWarnings').textContent = 
+          "Active Warnings: " + count;
+      } catch (error) {
+        console.error('Error fetching tornado warnings:', error);
+        document.getElementById('activeWarnings').textContent = 
+          "Active Warnings: Error";
+      }
+    }
+
+    // Fetch and display the count when the page loads
+    fetchTornadoWarnings();
+  </script>
+</body>
+</html>
