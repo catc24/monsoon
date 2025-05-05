@@ -293,7 +293,7 @@ If you have no idea how to perform this or don't feel like modifying your own cu
 > This project was made possible by the following people. Please make sure to check them out and support them! <3
 
 
-<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="AndrewTheWeatherGuy" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+https://buymeacoffee.com/andrewtheweatherguy
 
 <table align="center" style="border-collapse: collapse; margin: 0 auto;">
 	<tr align="center">
