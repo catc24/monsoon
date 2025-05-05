@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Warning Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="content">
+        <div class="container">
+            <!-- Toggle Button for Slider -->
+            <button id="toggleSlider" onclick="toggleslider()">Toggle Dashboard</button>
+            <div class="logo-container">
+                <img src="https://i.postimg.cc/7LmdmFC6/IWXONLINE.png" alt="Logo" class="logo" id="pulseLogo">
+            </div>
+            <div class="emergency-icon">
+                <img src="https://i.postimg.cc/DwFyZb3k/Exclamation.png" alt="Logo" class="logo" id="pulseLogo">
+            </div>
+            <div id="alertDetailModal" class="modal hidden">
+                <div class="modal-content">
+                    <span class="close-button" onclick="closeModal()">&times;</span>
+                    <h2 id="alertTitle"></h2>
+                    <p id="alertDescription"></p>
+                    <p><strong>Max Wind Gust:</strong> <span id="maxWindGust"></span></p>
+                    <p><strong>Max Hail Size:</strong> <span id="maxHailSize"></span></p>
+                    <p><strong>Tornado Detection:</strong> <span id="tornadoDetection"></span></p>
+                    <p><strong>Tornado Damage Threat:</strong> <span id="tornadoDamageThreat"></span></p>
+                    <p><strong>Expires:</strong> <span id="expires"></span></p>
+                    <div id="polygonContainer"></div>
+                </div>
+            </div>
+            <!-- Slider Container for the elements -->
+            <div id="sliderContainer" class="slider-container">
+                <!-- Weather Dashboard Sections -->
+                <div class="warning-counts" id="warningCounts">
+                    <div id="tornadoCount" class="warning-count tornado-count">TORNADO WARNINGS: 0</div>
+                    <div id="thunderstormCount" class="warning-count thunderstorm-count">SEVERE THUNDERSTORM WARNINGS: 0</div>
+                    <div id="floodCount" class="warning-count flood-count">FLASH FLOOD WARNINGS: 0</div>
+                    <div id="winterWeatherCount" class="warning-count winter-weather-count">WINTER WEATHER WARNINGS: 0</div>
+                </div>
+                <div id="warningList" class="warning-list"></div>
+                
+
+
+                <div class="test-buttons" id="testButtons">
+                    <h3>Test Notifications</h3>
+                    <button onclick="testNotification('Tornado Warning')">Test Tornado Warning (Radar Indicated)</button>
+                    <button onclick="testNotification('Observed Tornado Warning')">Test Observed Tornado Warning</button>
+                    <button onclick="testNotification('PDS Tornado Warning')">Test PDS Tornado Warning</button>
+                    <button onclick="testNotification('Tornado Emergency')">Test Tornado Emergency</button>
+                    <button onclick="testNotification('Severe Thunderstorm Warning')">Test Severe Thunderstorm Warning</button>
+                    <button onclick="testNotification('Severe Thunderstorm Warning (Considerable)')">Test Severe Thunderstorm Warning (Considerable)</button>
+                    <button onclick="testNotification('Severe Thunderstorm Warning (Destructive)')">Test Severe Thunderstorm Warning (Destructive)</button>
+                    <button onclick="testNotification('Flash Flood Warning')">Test Flash Flood Warning</button>
+                    <button onclick="testNotification('Flash Flood Emergency')">Test Flash Flood Emergency</button>
+                    <button onclick="testNotification('Tornado Watch')">Test Tornado Watch</button>
+                    <button onclick="testNotification('Severe Thunderstorm Watch')">Test Severe Thunderstorm Watch</button>
+                    <button onclick="testNotification('Winter Weather Advisory')">Test Winter Weather Advisory</button>
+                    <button onclick="testNotification('Winter Storm Watch')">Test Winter Storm Watch</button>
+                    <button onclick="testNotification('Winter Storm Warning')">Test Winter Storm Warning</button>
+                    <button onclick="testNotification('Special Weather Statement')">Test Special Weather Statement</button>
+                    <button onclick="testNotification('Ice Storm Warning')">Test Ice Storm Warning</button>
+                    <button onclick="testNotification('Blizzard Warning')">Test Blizzard Warning</button>
+                    <button onclick="testMostRecentAlert()">Test Most Recent Alert</button>                    
+                </div>
+                <div class="container">
+
+                <div class="custom-alert-builder">
+                    <h3>Build Your Own Custom Alert</h3>
+                    <label for="alertType">Select Event Type:</label>
+                    <select id="alertType">
+                        <option value="Tornado Warning">Tornado Warning</option>
+                        <option value="Observed Tornado Warning">Observed Tornado Warning</option>
+                        <option value="PDS Tornado Warning">PDS Tornado Warning</option>
+                        <option value="Tornado Emergency">Tornado Emergency</option>
+                        <option value="Severe Thunderstorm Warning">Severe Thunderstorm Warning</option>
+                        <option value="Severe Thunderstorm Warning (Considerable)">Severe Thunderstorm Warning (Considerable)</option>
+                        <option value="Severe Thunderstorm Warning (Destructive)">Severe Thunderstorm Warning (Destructive)</option>
+                        <option value="Tornado Watch">Tornado Watch</option>
+                        <option value="Severe Thunderstorm Watch">Severe Thunderstorm Watch</option>
+                        <option value="Winter Weather Advisory">Winter Weather Advisory</option>
+                        <option value="Winter Storm Warning">Winter Storm Warning</option>
+                        <option value="Winter Storm Watch">Winter Storm Watch</option>
+                        <option value="Special Weather Statement">Special Weather Statement</option>
+                        <option value="Ice Storm Warning">Ice Storm Warning</option>
+                        <option value="Blizzard Warning">Blizzard Warning</option>
+                    </select><br><br>
+                
+                    <label for="detection">Detection Type:</label>
+                    <select id="detection">
+                        <option value="Radar Indicated">Radar Indicated</option>
+                        <option value="Observed">Observed</option>
+                    </select><br><br>
+                
+                    <label for="damageThreat">Damage Threat:</label>
+                    <select id="damageThreat">
+                        <option value="NONE">None</option>
+                        <option value="CONSIDERABLE">Considerable</option>
+                        <option value="DESTRUCTIVE">Destructive</option>
+                        <option value="CATASTROPHIC">Catastrophic</option>
+                    </select><br><br>
+                
+                    <label for="countiesInput">Enter Counties (comma separated):</label>
+                    <input type="text" id="countiesInput" placeholder="e.g., County1, County2"><br><br>
+                    
+                    <label for="expiration">Expiration Time (in minutes):</label>
+                    <input type="number" id="expiration" placeholder="e.g., 60" value="30"><br><br>                    
+                    
+                    <button id="generateAlertButton">Generate Alert</button>
+                    
+                </div>
+            </div>
+
+                <div class="checkbox-container" id="checkboxContainer">
+                    <h3>Select Alerts to Show:</h3>
+                    <label><input type="checkbox" value="Tornado Warning" checked> Tornado Warning</label><br>
+                    <label><input type="checkbox" value="Observed Tornado Warning" checked>Observed Tornado Warning</label><br>
+                    <label><input type="checkbox" value="PDS Tornado Warning" checked> PDS Tornado Warning</label><br>
+                    <label><input type="checkbox" value="Tornado Emergency" checked> Tornado Emergency</label><br>
+                    <label><input type="checkbox" value="Severe Thunderstorm Warning" checked> Severe Thunderstorm Warning</label><br>
+                    <label><input type="checkbox" value="Severe Thunderstorm Warning (Considerable)" checked> Severe Thunderstorm Warning (Considerable)</label><br>
+                    <label><input type="checkbox" value="Severe Thunderstorm Warning (Destructive)" checked> Severe Thunderstorm Warning (Destructive)</label><br>
+                    <label><input type="checkbox" value="Flash Flood Warning" checked> Flash Flood Warning</label><br>
+                    <label><input type="checkbox" value="Tornado Watch" checked> Tornado Watch</label><br>
+                    <label><input type="checkbox" value="Severe Thunderstorm Watch" checked> Severe Thunderstorm Watch</label><br>
+                    <label><input type="checkbox" value="Winter Weather Advisory" checked> Winter Weather Advisory</label><br>
+                    <label><input type="checkbox" value="Winter Storm Warning" checked> Winter Storm Warning</label><br>
+                    <label><input type="checkbox" value="Winter Storm Watch" checked> Winter Storm Watch</label><br>
+                    <label><input type="checkbox" value="Special Weather Statement" checked> Special Weather Statement</label><br>
+                    <label><input type="checkbox" value="Ice Storm Warning" checked> Ice Storm Warning</label><br>
+                    <label><input type="checkbox" value="Blizzard Warning" checked> Blizzard Warning</label><br>                    
+                    <label for="stateInput">State Warnings (US for all US alerts):</label><br>
+                    <input type="text" id="stateInput" placeholder="e.g., OK"><br>
+                    <button id="saveStateButton">Save State And Fetch Warnings</button><br>
+                    <button id="saveButton">Begin Fetching Warnings from NWS API (Slower, More Reliable)</button><br>
+                    <button id="tacticalModeButton">Fetch from Ryder's Experimental API</button><br>
+                </div>
+
+                                          
+                
+             <!-- Time Zone Toggle -->
+                    <div id="Central/Eastern Switch">
+                     <button id="toggleTimeZone" onclick="toggleTimeZone()">Switch to Central Time</button>
+                     </div>
+     
+
+                <div id="customWarningContainer" class="hidden">
+                    <button id="singleNotificationToggleButton">Enable Single Notification Que (Enable AFTER Loading Warnings)</button>
+                    <label>
+                        <input type="checkbox" id="testMessageCheckbox">
+                        Dev Purposes Only - Show 'THIS IS A TEST MESSAGE' At the Top of a Notification - This Will Show on ANY Notification that pops up if enabled.
+                    </label><br>
+                    <div>
+                        <h3>Custom Warning Input</h3>
+                        <input type="text" id="customWarningInput" placeholder="Paste your warning here" />
+                        <button id="testCustomWarningButton">Test Custom Warning</button>
+                    </div>
+                </div>
+            </div>
+            <div class="active-alerts-box">LOADING...</div>
+            <div class="semicircle">
+                <div class="time-date" id="clockDisplay"></div>
+              </div>
+            <div class="rounded-info-box"></div>
+
+            <!-- Rest of your elements (top bar, bottom bar, etc.) -->
+            <div class="bottom-bar">
+                <div class="left-section">
+                    <span id="ActiveAlertText">Loading...</span>
+                    <div id="eventType" class="event-type-bar">EVENT TYPE</div>
+                </div>
+                <div id="counties" class="counties-bar">COUNTY NAMES</div>
+                <div id="expiration" class="expiration-bar">Expiration Time</div>
+            </div>
+            <div class="black-bar"></div>
+            <div id="alertBar" class="alert-bar">
+                <span id="highestAlertText">LOADING...</span>
+            </div>
+        </div>
+    </div>
+    
+<!-- Your custom script -->
+<!-- Your custom script -->
+<script src="script.js"></script>
+
+<!-- Use @xmpp/client browser bundle -->
+<script 
+  src="https://unpkg.com/@xmpp/client@0.13.4/dist/xmpp.min.js"
+  crossorigin
+></script>
+
+
+
+<!-- Socket.IO if needed -->
+<script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+
+
+    
+</body>
+</html>
