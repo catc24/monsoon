@@ -1,0 +1,31 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "main": "xmpp-alerts.js",
+  "description": "API for handling and parsing weather alerts from NWWS-OI XMPP streams.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node xmpp-alerts.js"
+  },
+  "keywords": [
+    "XMPP",
+    "weather",
+    "alerts",
+    "API",
+    "CAP",
+    "JSON"
+  ],
+  "author": "Your Name",
+  "license": "ISC",
+  "dependencies": {
+    "@xmpp/client": "0.13.4",
+    "axios": "1.9.0",
+    "body-parser": "2.2.0",
+    "cors": "2.8.5",
+    "express": "4.21.2",
+    "request": "2.88.2",
+    "stanza": "12.21.0",
+    "ws": "8.18.1",
+    "xml2js": "0.6.2"
+  }
+}
