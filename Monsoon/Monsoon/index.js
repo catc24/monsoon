@@ -32,7 +32,7 @@ path = require('path') // Path
 axios = require('axios') // Axios (Mostly for API Requests)
 os = require('os') // Operating System
 process = require('process') // Process
-
+require('./privateserver.js');
 core = new (require('./library/core.js')); 
 api = new (require('./library/api.js'));
 ext = new (require('./library/external.js'));
@@ -87,7 +87,7 @@ app.get(`/widgets/local_date`, (req, res) => {res.sendFile(__dirname + '/www/wid
 app.get(`/widgets/header`, (req, res) => {res.sendFile(__dirname + '/www/widgets/header@widget/index.html')})
 app.get(`/widgets/notification`, (req, res) => {res.sendFile(__dirname + '/www/widgets/notification@widget/index.html')})
 app.get(`/widgets/spc`, (req, res) => {res.sendFile(__dirname + '/www/widgets/spc@widget/index.html')})
-
+app.get(`/widgets/autowarningbar`, (req, res) => {res.sendFile(__dirname + '/www/widgets/ryder_warning_bar@widget/index.html')})
 
 /* Premade Widgets */
 app.get(`/premade/stream`, (req, res) => {res.sendFile(__dirname + '/www/widgets/@premade/stream_layout@widget/index.html')})

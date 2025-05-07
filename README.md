@@ -282,6 +282,8 @@ If you have no idea how to perform this or don't feel like modifying your own cu
 - (GET)  (PUBLIC) /widgets/local_date
 - (GET)  (PUBLIC) /widgets/header
 - (GET)  (PUBLIC) /widgets/notification
+- (GET)  (PUBLIC) /widgets/autowarningbar
+
 
 [Premade Overlays]
 - (GET)  (PUBLIC) /premade/stream

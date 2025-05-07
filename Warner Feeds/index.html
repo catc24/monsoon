@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Warning Dashboard</title>
-    <link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="/widgets/ryder_warning_bar@widget/style.css">
 </head>
 <body>
     <div class="content">
@@ -39,10 +39,10 @@
                     <div id="floodCount" class="warning-count flood-count">FLASH FLOOD WARNINGS: 0</div>
                     <div id="winterWeatherCount" class="warning-count winter-weather-count">WINTER WEATHER WARNINGS: 0</div>
                 </div>
-                <div id="warningList" class="warning-list"></div>
+                
                 
 
-
+                <div id="warningList" class="warning-list"></div>
                 <div class="test-buttons" id="testButtons">
                     <h3>Test Notifications</h3>
                     <button onclick="testNotification('Tornado Warning')">Test Tornado Warning (Radar Indicated)</button>
@@ -135,6 +135,7 @@
                     <button id="saveStateButton">Save State And Fetch Warnings</button><br>
                     <button id="saveButton">Begin Fetching Warnings from NWS API (Slower, More Reliable)</button><br>
                     <button id="tacticalModeButton">Fetch from Ryder's Experimental API</button><br>
+                    <button id="clearWarningsButton">Clear All Warnings (Use for Test Notifications Only!)</button>
                 </div>
 
                                           
@@ -182,7 +183,7 @@
     
 <!-- Your custom script -->
 <!-- Your custom script -->
-<script src="script.js"></script>
+<script src="/widgets/ryder_warning_bar@widget/script.js"></script>
 
 <!-- Use @xmpp/client browser bundle -->
 <script 

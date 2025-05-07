@@ -6,6 +6,19 @@
     "defaults",
     "not ie 11",
     "not ios_saf <= 18.3",
-    "not safari <= 18.3"
-  ]
+    "not safari <= 18.3",
+    "not chrome <= 109",
+    "not samsung <= 27"
+  ],
+  "hints": {
+    "compat-api/css": [
+      "default",
+      {
+        "ignore": [
+          "scrollbar-width",
+          "scrollbar-color"
+        ]
+      }
+    ]
+  }
 }
